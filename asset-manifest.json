@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/morevo-react.github.io/static/css/main.61aa24b5.chunk.css",
+    "main.js": "/morevo-react.github.io/static/js/main.316438b2.chunk.js",
+    "main.js.map": "/morevo-react.github.io/static/js/main.316438b2.chunk.js.map",
+    "runtime-main.js": "/morevo-react.github.io/static/js/runtime-main.9fc05a3b.js",
+    "runtime-main.js.map": "/morevo-react.github.io/static/js/runtime-main.9fc05a3b.js.map",
+    "static/js/2.4113ac36.chunk.js": "/morevo-react.github.io/static/js/2.4113ac36.chunk.js",
+    "static/js/2.4113ac36.chunk.js.map": "/morevo-react.github.io/static/js/2.4113ac36.chunk.js.map",
+    "static/js/3.9923a013.chunk.js": "/morevo-react.github.io/static/js/3.9923a013.chunk.js",
+    "static/js/3.9923a013.chunk.js.map": "/morevo-react.github.io/static/js/3.9923a013.chunk.js.map",
+    "index.html": "/morevo-react.github.io/index.html",
+    "static/css/main.61aa24b5.chunk.css.map": "/morevo-react.github.io/static/css/main.61aa24b5.chunk.css.map",
+    "static/js/2.4113ac36.chunk.js.LICENSE.txt": "/morevo-react.github.io/static/js/2.4113ac36.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.9fc05a3b.js",
+    "static/js/2.4113ac36.chunk.js",
+    "static/css/main.61aa24b5.chunk.css",
+    "static/js/main.316438b2.chunk.js"
+  ]
+}
