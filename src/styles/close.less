@@ -7,7 +7,15 @@
     background-color: transparent;
     border-radius: 50%;
   
-    &:hover .modal__pleace-img {
+  }
+
+  .modal__pleace-img {
+    border: 1px solid @black;
+    border-radius: 50%;
+    transition: all 0.7s ease;
+    transform: scale(0.95);
+
+    &:hover {
       background-color: red;
       box-shadow: 0 0 2px fade(@black, 100%);
       transform: scale(1.1);
@@ -21,13 +29,6 @@
     &:hover .modal__close-img {
       transform: rotate(180deg);
     }
-  }
-
-  .modal__pleace-img {
-    border: 1px solid @black;
-    border-radius: 50%;
-    transition: all 0.7s ease;
-    transform: scale(0.95);
   }
   
   .modal__close-img {

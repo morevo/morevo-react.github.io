@@ -20,7 +20,7 @@ let styles = {
   newInput: {
     width: "17px",
     height: "17px",
-    borderRadius: "20px",
+    borderRadius: "7px",
     margin: "0 0.4rem",
   },
 
