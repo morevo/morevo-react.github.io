@@ -17,18 +17,20 @@
 .todo__inner {
   border: 2px solid @black;
   border-radius: 2rem;
+  width: 400px;
 }
 
 .todoitem__new-input {
   display: inline-block;
   position: relative;
   border: 1px solid #6a696b;
-  transition: all 0.2s ease;
+  transition: all 0.4s ease;
 }
 
 .todoitem__new-input:hover {
-  transition: all 0.2s ease;
   border-color: @black;
+  transition: all 0.2s ease;
+  background-color: fade(lawngreen, 13%);
 }
 
 .container {
@@ -42,12 +44,9 @@
   width: 0;
 }
 
-.todoitem__new-input:hover {
-  background-color: fade(green, 20%);
-}
-
 .container input:checked + .todoitem__new-input {
-  background-color: green;
+  transition: all 0.4s ease;
+  background-color: lawngreen;
 }
 
 .todoitem__new-input:after {
@@ -64,8 +63,13 @@
   left: 4.6px;
   bottom: 3px;
   width: 4px;
-  height: 11px;
-  border: solid #fff;
+  height: 10px;
+  border: solid @white;
   border-width: 0 3px 3px 0;
   transform: rotate(45deg);
+}
+
+.todolist__clear {
+  text-align: center;
+  font-weight: 300;
 }

@@ -13,8 +13,8 @@ let styles = {
 function TodoList(props) {  // Мой массив tasks здесь обернулся в объект, потому как мы его не взяли в {}
   return (
     <ul style={styles.ul}>
-      {props.tasks.map((item, index) => (
-        <TodoItem item={item} index={index} key={item.id} />
+      {props.tasks.map((task, index) => (
+        <TodoItem task={task} index={index} key={task.id} changeTitle={props.onToggle}/>
       ))}
     </ul>
   );
@@ -29,8 +29,15 @@ function TodoList(props) {  // Мой массив tasks здесь оберну
 // 30 {/* С помощью библиотеки prop-types мы можем делать более сложные валидации, например указать что tasks это не просто массив, а массив объектов - tasks: PropTypes.arrayOf(PropTypes.object).isRequired. isRequired говорит о том, что массив с объектами нам нужен для работы с данным компонентов, то есть с функцией TodoList  */}
 // 31 {/* Добавим также валидацию для компонента Todoitem.js ->*/}
 // 32 {/* Сейчас, в компоненте TodoList в качестве index мы передаем числа, но если мы поменяем index в коде выше и сделаем его строкой, то мы увидим ошибку в консоле, так как компонент TodoItem ожидает как раз таки число, а мы передаем строку, так как мы указывали что index это число в проверке на prop-types, получается это такой мини тест, мини статичность */}
+// 36 {/* Теперь мы знаем что в компонент TodoItem мы передаем функцию changeTitle, так как здесь мы вызываем Компонент TodoItem, он должен передавать ту же функцию которую мы указали в todoItem. TodoItem выводится в списке компонента TodoList поэтому мы его должны вызвать для каждого компонента здесь, в Todolist нашу функцию changeTitle*/}
+// 37 {/* Данное событие changeTitle нам нужно соеденить с родительским элементом App.js, поэтому мы будем передавать в changeTitle объект props с методом onToggle props.onToggle  */}
+// 38 {/* Теперь я знаю что я принимаю в Компоненте todoList метод onToggle, поэтому описываем его в propTypes здесь ниже*/}
+// 39 {/* Теперь я запоминаю данное название метода здесь onToggle, и я должен передать его в родительский компонент чтобы все остальные его видели*/}
+// 43 {/* В props.onToggle мы передаем changeTitle -> 44 */}
 TodoList.propTypes = {
     tasks: PropTypes.arrayOf(PropTypes.object).isRequired,
+    onToggle: PropTypes.func.isRequired,
+
 }
 
 export default TodoList;

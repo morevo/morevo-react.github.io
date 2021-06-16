@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 import PropTypes from "prop-types";
-import TodoClose from "./Todoclose";
+import Context from "../context";
 let styles = {
   li: {
     padding: "0.4rem 0",
@@ -20,7 +20,7 @@ let styles = {
   newInput: {
     width: "17px",
     height: "17px",
-    borderRadius: "7px",
+    borderRadius: "20px",
     margin: "0 0.4rem",
   },
 
@@ -34,29 +34,63 @@ let styles = {
   }
 };
 
-function TodoItem({ item, index }) {
+function TodoItem({ task, index, changeTitle}) {
+  let classes = []; 
+  const { removeTask } = useContext(Context);
+  if(task.completed) {
+    classes.push("done");
+  }
   // Если мне нужно получить сразу элемент не оборачивая его в объект в параметрах функции, тогда я пишу название элемента в {} скобках
   return (
     <li style={styles.li}>
       <span style={styles.liSpan}>
         <span className="container">
-          <input id={index + 1} className="todoitem__input" type="checkbox" name="checkbox" value="yes" />
+          <input id={index + 1} type="checkbox" onChange={() => changeTitle(task.id)} checked={task.completed}/>
         <label htmlFor={index + 1} className="todoitem__new-input" style={styles.newInput}></label>
         </span>
         <strong style={styles.strong}>{index + 1}. </strong>
-        {item.title}
+        <span className={classes.join(" ")}>{task.title}</span>
       </span>
-
-      <TodoClose />
+    
+      <button type="button" className="modal__close" data-exit="close">
+      <div className="modal__pleace-img" onClick={removeTask.bind(null, task.id)}>
+        <svg className="modal__close-img">
+          <use className="modal__close-img-icon" xlinkHref="#close"></use>
+        </svg>
+      </div>
+    </button>
     </li>
   );
 }
 
 // 31 {/* Добавим также валидацию для компонента Todoitem.js. Загружаем библиотеку prop-types также в файл TodoItem, Удаляем export default перед объявлением функции, добавляем в конец файла, пишем свойства для функции TodoItem.propTypes, и определяем элементы. item: PropTypes.object.isRequired - item это объект, который необходимый, требуемый для работы этого компонента TodoItem. И index: PropTypes.number.isRequired - index это тип number, который необходимый для работы этого компонента TodoItem */}
 // 33 {/* Теперь поработаем над шаблоном каждого из элементов <li>, превратим их во что-то более красивое, переходим в компонент Todoitem, и задаем некоторую структуру, в тэге <li></li> будет лежать тэг span, внутри span будет лежать элемент input с type="checkbox". Кладём все элементы внутри <li> внутрь тэга <span>, а после тэга <span> в <li> мы будем показывать тэг <button> а внутри него будет лежать специальный html символ - &times; который добавляем крестик */}
+// 34 {/* Добавляем событие к чекбоксу, делаем для него метод onChange={() =>} в который помещает колбэк функцию, которая будет что-то делать, нам нужно поменять значение completed: false на true, и если он будет равен true, нам нужно зачеркивать текст. Указываем для проверки вывод в консоль item.id (item это у нас объект с {id: 1, completed: false, title: "Learn TypeScript"}, для того чтобы передать в родительскую функцию изменения, добавляем в Компонент TodoItem параметром функцию. И когда у меня будет происходить событие onChange, мы будем вызывать метод changeTitle, куда мы будем передавать item.id того элемента по которому кликнул. Опишем свойство changeTitle в propTypes чтобы у нас была валидация - changeTitle: PropTypes.func.isRequired,*/}
+// 35 {/* Теперь мы знаем что в компонент TodoItem мы передаем функцию changeTitle, идём в Todolist и работаем там  */}
+// 41 {/* То есть мы создаем метод например onChange на том элементе который будем отслеживать или менять, передали в него функцию колбэк changeTitle которую передали сюда в TodoItem компонент через родительский элемент. onChange={() => changeTitle(item.id)} -> Идём в TodoList, создаем там у TodoItem компонента функцию с методом которая будет передавать наш item.id в родительские, вышестоящие элементы - changeTitle={props.onToggle}. -> Дальше идём в App.js компонент, у Компонента TodoList создаем метод с названием функции onToggle который передается в Todolist onToggle={toggleTodo}. Далее создаем в App Компоненте обычную функцию под названием toggleTodo, проверяем id вывод в консоль. Дальше сравниваем что если элемент массива tasks.id будет равен === id который мы передали с TodoItem, то тогда мы будем менять состояние элемента completed с false на true */}
+// 42 {/* В changeTitle мы передаем item.id, передаем changeTitle в параметр функции -> 43 */}
+// 56 {/* В данный момент если мы будем нажимать на checkbox, у нас ничего не будет меняться(перерендериваться) наш task.complated - если true - добавляем класс, если false, не добавляем, как нам это сделать */}
+// 57 {/* Допустим мы знаем что в реакте все идёт через javascript, поэтому классы здесь тоже не исключение, мы можем завести переменную classes в TodoItem, которая по умолчанию будет пустым массивом, и дальше мы спросим, if(task.completed(будет true)) {}(тогда мы будем добавлять массиву classes, методом push, класс который называется "done")*/}
+// 58 {/* Теперь данный массив classes нам нужно передать в шаблон, тэгу span где содержится наш текст task.title который нужно зачеркнуть */}
+// 59 {/* И теперь в чём заключается идея, теперь если мы нажимаем на какой-нибудь toDo у нас добавляется динамически этот класс "done", а когда убираем check, то класс убирается */}
+// 61 {/* Для того что бы это исправить,в компоненте TodoItem мы обращаемся к input'y, нам нужно у input указать поле checked куда мы будем передавать условие, у наше условие находится в task.completed. (если task.completed будет true, тогда checked, если false, тогда empty). Теперь все работает корректно */}
+// 62 {/* Теперь поработаем над кнопочкой каждого из Todo, сейчас если мы по ней кликаем, то ничего не происходит, но было бы неплохо удалять какой-либо из элементов массива, и из шаблона кликнув по крестику*/}
+// 63 {/* Для этого розберем следующий концепт. Во превых в первом примере мы с onChange разобрали как мы можем поэтапно передавать функции от дочерних до родительских, и для этого нам сначало пришлось передавать onChange для Компонента TodoList, после этого нам пришлось передать свойство props.onToggle в Компонент App, но если вложенность будет намного больше, то тогда у меня бы намного больше кода. Поэтому в React есть очень крутая фича которая позволяет напрямую передавать определённые свойства избегая некоторых промежуточных этапов */}
+// 64 {/* Для этого в папке src я создам новый файл, который я назову context.js, идём в него -> */}
+// 74 {/* Для начала мне нужно добавить сюда тот самый контекст через import Context from  */}
+// 75 {/* Дальше, учитывая что наш компонент TodoItem является функциональным, то есть это функция, мне необходимо обработать этот контекст Context который мы импортировали  */}
+// 76 {/* И для этого в React существуем еще один hook, который называется useContext, который мы можем забирать таким образом import React, {useContext} from "react"; */}
+// 77 {/* Далее нам необходимо воспользоваться этой функцией внутри TodoItem Компонента, для этого создаем переменную-деструктуризацию, const {} = useContext, присваиваем ей функцию useContext, куда просто передадим тот Context который мы передали в Компоненте App */}
+// 78 {/* На выходе в деструктуризации мы получаем объект, который совпадает с тем значением value{{removeTask}} которое мы передаем, и учитывая что у объекта value есть ключ Task, то мы также в Компоненте можем получить это значение, в деструктуризации */}
+// 79 {/* removeTask, это функция которая принимает в себя некоторый id, вызываем обработчик событий onClick на кнопке close, и просто передаем туда значение removeTodo */}
+// 80 {/* Но мы помним что данная функция removeTask должна должна быть вызвана с тем id который необходимо удалить, мы можем либо вызвать collback функцию, либо вызвать метод bind у функции,и активировать её при нажатии что бы она не вызывалась сразу. onClick={removeTask.bind(null, task.id)} первым параметром передаем любое значение, например null, а вторым значение которое мы будем передавать в параметр функции removeTask */}
+// 81 {/* Теперь удаление работает, теперь мы удаляем необходимые Todo tasks, учитывая то, что мы теперь избегаем компонент TodoList, и в TodoList у нас нету никакой логики связанной с удалением Todo */}
+// 82 {/* Но теперь, если мы удалим все Todo, то мы получаем чистый лист, и было бы неплохо написать что если у нас нету задач, то мы так и напишем, что активных задач нету, для этого переходим в Компонент App */}
+
 TodoItem.propTypes = {
-  item: PropTypes.object.isRequired,
+  task: PropTypes.object.isRequired,
   index: PropTypes.number,
+  changeTitle: PropTypes.func.isRequired,
 };
 
 export default TodoItem;
