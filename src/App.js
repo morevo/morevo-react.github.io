@@ -1,9 +1,9 @@
 import React from "react";
 import TodoList from "./Todo/Todolist";
 import Context from "./context";
+import AddTask from "./Todo/AddTask";
 
 function App() {
-
   let [tasks, setTasks] = React.useState([
     { id: 1, completed: false, title: "Learn TypeScript" },
     { id: 2, completed: false, title: "Learn React" },
@@ -13,28 +13,41 @@ function App() {
   ]);
 
   function toggleTask(id) {
-    setTasks( tasks.map( (task) => {
-      if(task.id === id) {
-        task.completed = !task.completed;
-      }
-      return task;
-    }))
+    setTasks(
+      tasks.map((task) => {
+        if (task.id === id) {
+          task.completed = !task.completed;
+        }
+        return task;
+      })
+    );
   }
-  
+
   function removeTask(id) {
-    setTasks( tasks.filter( (task) => task.id !== id)
-    )
+    setTasks(tasks.filter((task) => task.id !== id));
+  }
+
+  function addTask(title) {
+    setTasks(tasks.concat([{
+      title,
+      id: Date.now(),
+      completed: false,
+    }]))
   }
 
   return (
-    <Context.Provider value={{removeTask}}>
-    <div className="todo">
-      <div className="todo__inner">
-        <h1 className="todo__title">Todo list</h1>
-
-        {tasks.length ? <TodoList tasks={tasks} onToggle={toggleTask}/> : <h2 className="todolist__clear">No active tasks</h2> }
+    <Context.Provider value={{ removeTask }}>
+      <div className="todo">
+        <div className="todo__inner">
+          <h1 className="todo__title">Todo list</h1>
+          <AddTask onCreate={addTask}/>
+          {tasks.length ? (
+            <TodoList tasks={tasks} onToggle={toggleTask} />
+          ) : (
+            <h2 className="todolist__clear">No active tasks</h2>
+          )}
+        </div>
       </div>
-    </div>
     </Context.Provider>
   );
 }
@@ -68,3 +81,8 @@ export default App;
 // 82 {/* Для того чтобы написать что нету активных задач после удаления всех tasks. Находим Компонент TodoList, и там где мы его выводим, мы также можем добавить определённые условия  */}
 // 83 {/* Для того чтобы обратиться к javaScript внутри шаблона JSX, мы указываем внутри return() фигурные скобки {}, и дальше спрашиваем - если в массиве и в его поле length tasks.length (Есть что-то отличное от нуля ), то тогда мы будем выводить наш Компонент TodoList, а иначе мы будет указывать через тэг и тернарный оператор <h2 className="todolist__">No active tasks</h2> что нету активных задач */}
 // 84 {/* Следующий этап, это добавить формочку которая позволит нам добавлять новые tasks */}
+// 85 {/* Для этого нам приходиться создавать новый компонент AddTask.js, и создаем там обычную функцию, без экспорта  */}
+// 93 {/* Теперь в компоненте App нам нужно передавать этот метод onCreate, который будет передавать данные в наш массив, а внутри создадим метод addTask*/}
+// 94 {/* Мы знаем что мы принимаем в функцию некоторый title, пишем параметр title*/}
+// 95 {/* Для того чтобы изменить наш state мы также здесь вызываем метод setTasks, куда передаем наш массив tasks, и чтобы добавить нам нужный элемент, мы можем вызвать метод concat, куда вначале передаем массив и в него объект [{}], и этот объект в последствии добавиться в массив tasks */}
+// 96 {/* Здесь у нас будет поле title которое будет совпадать со значением title, создадим id со значением например Date.now(), и completed: false*/}

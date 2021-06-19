@@ -1,6 +1,17 @@
 // main: ../index.less
 
-@black: #2B2A2C;
+@black: #2b2a2c;
 @white: #fff;
 @gray: #6a696b;
 @gray-light: #8d8d8e;
+@radiusPx: 20px;
+@borderPx: 1px;
+
+/* Mixins */
+.border(@borderPx, @black) {
+  border: @borderPx solid @black;
+}
+
+.radius(@radiusPx) {
+  border-radius: @radiusPx;
+}

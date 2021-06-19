@@ -1,0 +1,78 @@
+// main: ../index.less
+
+.form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+}
+
+.form__label {
+    font-size: 0.8rem;
+}
+
+.form__input {
+  font-size: 12px;
+  width: 10rem;
+  .radius(50px);
+
+  .border(@borderPx,@gray-light);
+
+  transition: all 0.3s ease;
+
+  padding: 0.6rem;
+
+  &:focus {
+    outline: none;
+
+    .border(@borderPx,@black);
+  }
+
+  &:hover {
+    .border(@borderPx,@black);
+  }
+
+  &:focus::placeholder {
+    color: @black;
+    transform: translateY(-10px);
+    font-size: 10px;
+  }
+}
+
+input::placeholder {
+  transition: all 0.3s ease;
+}
+
+.form__button {
+  background: none;
+
+  .border(@borderPx,@black);
+  .radius(50px);
+
+  padding: 0.6rem;
+
+  font-family: inherit;
+  font-weight: 400;
+
+  transition: all 0.3s ease;
+  cursor: pointer;
+
+  width: 8rem;
+
+  &:hover {
+    background: @black;
+    color: @white;
+    box-shadow: 0 0 3px fade(@black, 50%);
+  }
+}
+
+.form__padding {
+    margin: 0.3rem;
+}

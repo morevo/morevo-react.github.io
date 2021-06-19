@@ -1,6 +1,6 @@
-import React, { useContext } from "react";
+import React from "react";
 import PropTypes from "prop-types";
-import Context from "../context";
+import TaskClose from "./Taskclose";
 let styles = {
   li: {
     padding: "0.4rem 0",
@@ -36,7 +36,6 @@ let styles = {
 
 function TodoItem({ task, index, changeTitle}) {
   let classes = []; 
-  const { removeTask } = useContext(Context);
   if(task.completed) {
     classes.push("done");
   }
@@ -52,13 +51,7 @@ function TodoItem({ task, index, changeTitle}) {
         <span className={classes.join(" ")}>{task.title}</span>
       </span>
     
-      <button type="button" className="modal__close" data-exit="close">
-      <div className="modal__pleace-img" onClick={removeTask.bind(null, task.id)}>
-        <svg className="modal__close-img">
-          <use className="modal__close-img-icon" xlinkHref="#close"></use>
-        </svg>
-      </div>
-    </button>
+      <TaskClose task={task}/>
     </li>
   );
 }

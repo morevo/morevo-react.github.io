@@ -11,19 +11,18 @@
 .todo__title {
   font-size: 2.5rem;
   text-align: center;
-  margin: 2rem 0;
+  margin: 1.3rem 0;
 }
 
 .todo__inner {
-  border: 2px solid @black;
-  border-radius: 2rem;
-  width: 400px;
+  .border(@borderPx, @black);
+  .radius(2rem);
 }
 
 .todoitem__new-input {
   display: inline-block;
   position: relative;
-  border: 1px solid #6a696b;
+  .border(@borderPx, #6a696b);
   transition: all 0.4s ease;
 }
 
@@ -59,7 +58,7 @@
   display: block;
 }
 
-.container .todoitem__new-input:after  {
+.container .todoitem__new-input:after {
   left: 4.6px;
   bottom: 3px;
   width: 4px;
