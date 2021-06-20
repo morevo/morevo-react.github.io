@@ -34,7 +34,7 @@ let styles = {
   }
 };
 
-function TodoItem({ task, index, changeTitle}) {
+function TaskItem({ task, index, changeTitle}) {
   let classes = []; 
   if(task.completed) {
     classes.push("done");
@@ -80,10 +80,10 @@ function TodoItem({ task, index, changeTitle}) {
 // 81 {/* Теперь удаление работает, теперь мы удаляем необходимые Todo tasks, учитывая то, что мы теперь избегаем компонент TodoList, и в TodoList у нас нету никакой логики связанной с удалением Todo */}
 // 82 {/* Но теперь, если мы удалим все Todo, то мы получаем чистый лист, и было бы неплохо написать что если у нас нету задач, то мы так и напишем, что активных задач нету, для этого переходим в Компонент App */}
 
-TodoItem.propTypes = {
+TaskItem.propTypes = {
   task: PropTypes.object.isRequired,
   index: PropTypes.number,
   changeTitle: PropTypes.func.isRequired,
 };
 
-export default TodoItem;
+export default TaskItem;

@@ -1,5 +1,5 @@
 import React from "react";
-import TodoList from "./Todo/Todolist";
+import TaskList from "./Todo/Tasklist";
 import Context from "./context";
 import AddTask from "./Todo/AddTask";
 
@@ -42,7 +42,7 @@ function App() {
           <h1 className="todo__title">Todo list</h1>
           <AddTask onCreate={addTask}/>
           {tasks.length ? (
-            <TodoList tasks={tasks} onToggle={toggleTask} />
+            <TaskList tasks={tasks} onToggle={toggleTask} />
           ) : (
             <h2 className="todolist__clear">No active tasks</h2>
           )}

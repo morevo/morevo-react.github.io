@@ -1,5 +1,5 @@
 import React from "react";
-import TodoItem from "./Todoitem";
+import TaskItem from "./Taskitem";
 import PropTypes from "prop-types"; // Импортируем библиотеку PropTypes из "prop-types"
 let styles = {
   ul: {
@@ -10,11 +10,11 @@ let styles = {
   },
 };
 
-function TodoList(props) {  // Мой массив tasks здесь обернулся в объект, потому как мы его не взяли в {}
+function TaskList(props) {  // Мой массив tasks здесь обернулся в объект, потому как мы его не взяли в {}
   return (
     <ul style={styles.ul}>
       {props.tasks.map((task, index) => (
-        <TodoItem task={task} index={index} key={task.id} changeTitle={props.onToggle}/>
+        <TaskItem task={task} index={index} key={task.id} changeTitle={props.onToggle}/>
       ))}
     </ul>
   );
@@ -34,10 +34,10 @@ function TodoList(props) {  // Мой массив tasks здесь оберну
 // 38 {/* Теперь я знаю что я принимаю в Компоненте todoList метод onToggle, поэтому описываем его в propTypes здесь ниже*/}
 // 39 {/* Теперь я запоминаю данное название метода здесь onToggle, и я должен передать его в родительский компонент чтобы все остальные его видели*/}
 // 43 {/* В props.onToggle мы передаем changeTitle -> 44 */}
-TodoList.propTypes = {
+TaskList.propTypes = {
     tasks: PropTypes.arrayOf(PropTypes.object).isRequired,
     onToggle: PropTypes.func.isRequired,
 
 }
 
-export default TodoList;
+export default TaskList;

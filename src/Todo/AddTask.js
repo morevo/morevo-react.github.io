@@ -1,26 +1,40 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 
+function useInputValue(defaultValue = "") {
+  const [value, setValue] = useState(defaultValue); // useState, начальное состояние элемента value
+
+  return {
+    bind: {
+      value,
+      onChange: (event) => setValue(event.target.value), // Передаем в useState функцию изменения, таргет именно на инпуте. То есть в value лежит текст введённый в инпут, передаем в setState функцию, которая меняет value который лежит в const [value, setValue],  *event.target.value - и достали из него наш value и передали в useState для изменения value*
+    },
+
+    clear: () => setValue(""),
+    value: () => value,
+  };
+}
+
 function AddTask({ onCreate }) {
-  const [value, setValue] = useState(""); // useState, начальное состояние элемента value
+  const input = useInputValue("");
 
   function submitHandler(event) {
     event.preventDefault();
 
-    if (value.trim()) {
-      onCreate(value);
-      setValue("");
+    if (input.value().trim()) {
+      onCreate(input.value());
+      input.clear();
     }
   }
-  return ( // Вешаем на форму обработчик событий onSubmit, после submit, клика по кнопке, мы переходим в функцию, и выполняем там проверку, если value из input'a не пустое, тогда передаем его в функцию которая находится в app.js, и после этого вызываем состояние пустой строки, setValue("");
-    <form action="form" className="form" onSubmit={submitHandler}> 
+  return (
+    // Вешаем на форму обработчик событий onSubmit, после submit, клика по кнопке, мы переходим в функцию, и выполняем там проверку, если value из input'a не пустое, тогда передаем его в функцию которая находится в app.js, и после этого вызываем состояние пустой строки, setValue("");
+    <form action="form" className="form" onSubmit={submitHandler}>
       <div className="form__inner">
         <label htmlFor="enterText" className="form__label">
           Task
         </label>
         <input
-          value={value}
-          onChange={(event) => setValue(event.target.value)} // Передаем в useState функцию изменения, таргет именно на инпуте. То есть в value лежит текст введённый в инпут, передаем в setValue функцию, которая меняем value который лежит в const [value, setValue], 
+          {...input.bind}
           className="form__input form__padding"
           type="text"
           name="text"
@@ -63,3 +77,24 @@ AddTask.propTypes = {
 
 /* event.target.value отслеживает элемент на котором произошло событие */
 // event.target это отсылка к объекту, на котом сработало событие. Или другими словами, он указывает на HTML элемент на котором сработало событие. Событие в нашем случае это клик. Объект на котором отработало событие это <input/>. ** label рассматривается, как часть объекта input — поэтому мы видимо их обоих**.
+
+//Свойство event.target содержит элемент, на котором сработало событие - event.target.value - и достали из него наш value и передали в useState для изменения value. Это не тот элемент, к которому был привязан обработчик этого события, а именно самый глубокий тег, на который непосредственно был, к примеру, совершен клик.
+// event.target определяем элемент на котором произошло событие, а event.target.value уже вытягивает из этого элемента именно наш введённый текст (именно значение value у инпута), и перемещает его в useState для изменения, в функцию setValue. И оттуда уже в функцию обработчик onSubmit на форме - submitHandler
+
+//Свойство event.target содержит элемент, на котором сработало событие - event.target.value - и достали из него наш value и передали в useState для изменения value.
+
+/* Более продвинутая разработка, и более прикольные концепты которые есть в React */
+// 97 {/* Рассмотрим это все на примере компонента AddTask*/}
+// Мы сейчас пользуемся здесь стандартный хуком который называется useState
+// Мы можем создавать свои хуки, и улучшать приложение
+// Например мы знаем что мы передаем в input 2 свойства, value и setValue
+// Создадим новый хук (function useInputValue), которые мы будем называть со строчки use, и далее useInputValue например
+// Заносим в function параметр, то есть начальное состояние, делаем его пустой строкой
+// Далее мы выносим логику по определению этого Value, то есть заносим внутрь функции наш useState, и передаем в useState("") вместо пустой строки, наш defaultValue
+// В качестве значения, мы можем вернуть объект, у которого будет поле value, которое будет ровняться значению value, поэтому value просто пишем без равно
+// Задаем также значение onChange, функция которая принимает event, и то что она будет делать, она будет обращаться к методу setValue и задавать ему значение event.target.value
+// Обратим внимание на то, что данный новый хук возвращает объект, ключи которого нужны для input'a value={value} и onChange={(event) => setValue(event.target.value)}
+// Теперь как нам это может помочь. В компоненте AddTask, создаем переменную например input, и воспользуемся своим хуком который называется useInputValue(), по умолчанию мы туда передаем пустую строчку.
+// И теперь для обработки нашего инпута, мы можем удалить строчку value={value}  onChange={(event) => setValue(event.target.value)} у инпута, обратиться к фигурным скобкам и, и с помощью оператора spread развернуть объект input'a {...input}
+// И на самом деле данный оператор {...input} поместит в input значение value и значение onChange
+// Теперь меняем немного код, чтобы не было ошибок
