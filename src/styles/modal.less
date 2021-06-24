@@ -1,0 +1,28 @@
+// main: ../index.less
+
+.modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  background: fade(@black, 30%);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 1rem;
+
+  z-index: 1;
+}
+
+.modal__inner {
+  padding: 2rem;
+  width: 400px;
+  height: 400px;
+  border-radius: 20px;
+
+  background: @white;
+}
