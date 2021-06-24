@@ -1,22 +1,25 @@
 {
   "files": {
-    "main.css": "/morevo-react.github.io/static/css/main.980f6d8e.chunk.css",
-    "main.js": "/morevo-react.github.io/static/js/main.8fd0cdde.chunk.js",
-    "main.js.map": "/morevo-react.github.io/static/js/main.8fd0cdde.chunk.js.map",
-    "runtime-main.js": "/morevo-react.github.io/static/js/runtime-main.9ca9575c.js",
-    "runtime-main.js.map": "/morevo-react.github.io/static/js/runtime-main.9ca9575c.js.map",
-    "static/js/2.fa83ceff.chunk.js": "/morevo-react.github.io/static/js/2.fa83ceff.chunk.js",
-    "static/js/2.fa83ceff.chunk.js.map": "/morevo-react.github.io/static/js/2.fa83ceff.chunk.js.map",
-    "static/js/3.67640c5a.chunk.js": "/morevo-react.github.io/static/js/3.67640c5a.chunk.js",
-    "static/js/3.67640c5a.chunk.js.map": "/morevo-react.github.io/static/js/3.67640c5a.chunk.js.map",
+    "main.css": "/morevo-react.github.io/static/css/main.9caea096.chunk.css",
+    "main.js": "/morevo-react.github.io/static/js/main.62bd9ec5.chunk.js",
+    "main.js.map": "/morevo-react.github.io/static/js/main.62bd9ec5.chunk.js.map",
+    "runtime-main.js": "/morevo-react.github.io/static/js/runtime-main.93fccd2a.js",
+    "runtime-main.js.map": "/morevo-react.github.io/static/js/runtime-main.93fccd2a.js.map",
+    "static/js/2.538299e8.chunk.js": "/morevo-react.github.io/static/js/2.538299e8.chunk.js",
+    "static/js/2.538299e8.chunk.js.map": "/morevo-react.github.io/static/js/2.538299e8.chunk.js.map",
+    "static/js/3.9d4e8410.chunk.js": "/morevo-react.github.io/static/js/3.9d4e8410.chunk.js",
+    "static/js/3.9d4e8410.chunk.js.map": "/morevo-react.github.io/static/js/3.9d4e8410.chunk.js.map",
+    "static/js/4.db80aad6.chunk.js": "/morevo-react.github.io/static/js/4.db80aad6.chunk.js",
+    "static/js/4.db80aad6.chunk.js.map": "/morevo-react.github.io/static/js/4.db80aad6.chunk.js.map",
     "index.html": "/morevo-react.github.io/index.html",
-    "static/css/main.980f6d8e.chunk.css.map": "/morevo-react.github.io/static/css/main.980f6d8e.chunk.css.map",
-    "static/js/2.fa83ceff.chunk.js.LICENSE.txt": "/morevo-react.github.io/static/js/2.fa83ceff.chunk.js.LICENSE.txt"
+    "static/css/main.9caea096.chunk.css.map": "/morevo-react.github.io/static/css/main.9caea096.chunk.css.map",
+    "static/js/2.538299e8.chunk.js.LICENSE.txt": "/morevo-react.github.io/static/js/2.538299e8.chunk.js.LICENSE.txt",
+    "static/media/modal.a9bcc191.less": "/morevo-react.github.io/static/media/modal.a9bcc191.less"
   },
   "entrypoints": [
-    "static/js/runtime-main.9ca9575c.js",
-    "static/js/2.fa83ceff.chunk.js",
-    "static/css/main.980f6d8e.chunk.css",
-    "static/js/main.8fd0cdde.chunk.js"
+    "static/js/runtime-main.93fccd2a.js",
+    "static/js/2.538299e8.chunk.js",
+    "static/css/main.9caea096.chunk.css",
+    "static/js/main.62bd9ec5.chunk.js"
   ]
 }
