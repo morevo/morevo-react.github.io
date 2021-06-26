@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import TaskList from "./Todo/Tasklist";
 import Context from "./context";
 import Loader from "./Todo/Loader";
-import Modal from "./Modal/Modal";
+//import Modal from "./Modal/Modal";
 
 const AddTask = React.lazy(() => {
   return new Promise((resolve) => {
@@ -59,7 +59,7 @@ function App() {
       <div className="todo">
         <div className="todo__inner">
           <h1 className="todo__title">Todo list</h1>
-          <Modal />
+          {/* <Modal /> */}
           <React.Suspense fallback={<p> Loading... </p>}>
             <AddTask onCreate={addTask} />
           </React.Suspense>
